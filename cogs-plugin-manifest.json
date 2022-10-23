@@ -1,0 +1,72 @@
+{
+  "name": "Deconz",
+  "version": "1",
+  "minCogsVersion": "4.12.0",
+  "description": "Control Zigbee devices with Deconz",
+  "icon": "laptop-house",
+  "config": [
+    {
+      "name": "deconzHost",
+      "value": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    {
+      "name": "deconzApiKey",
+      "value": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    {
+      "name": "deconzPort",
+      "value": {
+        "type": "number",
+        "min": 0,
+        "integer": true,
+        "default": 0
+      }
+    }
+  ],
+  "events": {
+    "toCogs": [
+      {
+        "name": "Bedtime button"
+      },
+      {
+        "name": "Living room switch",
+        "value": { "type": "boolean" }
+      }
+
+    ]
+  },
+  "state": [
+    {
+      "name": "Bedroom lamps",
+      "value": {
+        "type": "boolean",
+        "default": false
+      },
+      "writableFromCogs": true
+    },
+    {
+      "name": "Shelf lamp",
+      "value": {
+        "type": "boolean",
+        "default": false
+      },
+      "writableFromCogs": true
+    },
+    {
+      "name": "Table lamp",
+      "value": {
+        "type": "boolean",
+        "default": false
+      },
+      "writableFromCogs": true
+    }
+  ],
+  "media": {},
+  "indexPath": "build"
+}
