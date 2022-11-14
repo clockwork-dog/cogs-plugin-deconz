@@ -33,7 +33,7 @@
     "toCogs": [
       {
         "name": "Bedroom button",
-        "value": { "type": "option", "options": [ "On Pressed" ] }
+        "value": { "type": "option", "options": [ "On Pressed", "On Long Pressed" ] }
       },
       {
         "name": "Living room switch",
