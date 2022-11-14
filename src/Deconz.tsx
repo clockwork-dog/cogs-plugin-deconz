@@ -5,6 +5,13 @@ import {
 } from "@clockworkdog/cogs-client-react";
 import { useCallback, useEffect, useState } from "react";
 
+export enum SensorValue {
+  OnPressed = "On Pressed",
+  OffPressed = "Off Pressed",
+  OnLongPressed = "On Long Pressed",
+  OffLongPressed = "Off Long Pressed",
+}
+
 interface CogsConnectionParams {
   config: {
     deconzHost: string;
@@ -15,7 +22,7 @@ interface CogsConnectionParams {
     [name: string]: boolean;
   };
   outputEvents: {
-    [name: string]: boolean | null;
+    [name: string]: SensorValue | null;
   };
 }
 
@@ -86,7 +93,6 @@ export default function Deconz() {
     deconzWs.onclose = () => setWebsocketConnected(false);
     deconzWs.onmessage = async (message) => {
       const event = JSON.parse(message.data);
-      // console.log(event);
 
       if (event.e === "changed" && event.r === "lights") {
         updateLight(event.id);
@@ -98,7 +104,10 @@ export default function Deconz() {
             [event.id]: { ...sensors[event.id], state: event.state },
           }));
           const value = sensorValue(event.state);
-          cogsConnection.sendEvent(name, value);
+          // An event with no value will be followed by an event with a value
+          if (value !== null) {
+            cogsConnection.sendEvent(name, value);
+          }
         }
       }
     };
@@ -177,12 +186,24 @@ export default function Deconz() {
   );
 }
 
+const SENSOR_VALUE_SHORT_PRESS_ON = 1002;
+const SENSOR_VALUE_SHORT_PRESS_OFF = 2002;
+const SENSOR_VALUE_LONG_PRESS_ON = 1001;
+const SENSOR_VALUE_LONG_PRESS_OFF = 2001;
+
 function sensorValue(
   state: { buttonevent: number } | undefined
-): boolean | null {
-  return state?.buttonevent === 1002
-    ? true
-    : state?.buttonevent === 2002
-    ? false
-    : null;
+): SensorValue | null {
+  switch (state?.buttonevent) {
+    case SENSOR_VALUE_SHORT_PRESS_OFF:
+      return SensorValue.OffPressed;
+    case SENSOR_VALUE_SHORT_PRESS_ON:
+      return SensorValue.OnPressed;
+    case SENSOR_VALUE_LONG_PRESS_OFF:
+      return SensorValue.OffLongPressed;
+    case SENSOR_VALUE_LONG_PRESS_ON:
+      return SensorValue.OnLongPressed;
+    default:
+      return null;
+  }
 }

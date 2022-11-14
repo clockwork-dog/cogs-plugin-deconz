@@ -32,13 +32,13 @@
   "events": {
     "toCogs": [
       {
-        "name": "Bedtime button"
+        "name": "Bedroom button",
+        "value": { "type": "option", "options": [ "On Pressed" ] }
       },
       {
         "name": "Living room switch",
-        "value": { "type": "boolean" }
+        "value": { "type": "option", "options": [ "On Pressed", "Off Pressed", "On Long Pressed", "Off Long Pressed"] }
       }
-
     ]
   },
   "state": [
