@@ -1,6 +1,6 @@
 {
   "name": "Deconz",
-  "version": "1",
+  "version": "0.2",
   "minCogsVersion": "4.12.0",
   "description": "Control Zigbee devices with Deconz",
   "icon": "laptop-house",

@@ -1,23 +1,19 @@
-# My custom COGS Media Master content
+# COGS Deconz (Zigbee) plugin
 
-This is a [`create-react-app`](https://create-react-app.dev) Typescript project that connects to [COGS](https://cogs.show) using [`@clockworkdog/cogs-client-react`](https://www.npmjs.com/package/@clockworkdog/cogs-client-react).
+## How to use
 
-## Local development in a browser
+### Install the plugin
 
-```
-yarn start "My custom Media Master"
-```
+- Download the plugin from [Releases](https://github.com/clockwork-dog/cogs-plugin-deconz/releases/latest)
+- Unzip into the `plugins` folder in your COGS project
+- In the plugin you have copied, edit `cogs-plugin-manifest.json` following the examples already there and set:
+  - Any lights/outlets you have add in Phoscon to `"state"` with the exact same `"name"`.
+  - Any button/switches you have add in Phoscon to the `"toCogs"` section of `"events"` with the exact same `"name"`.
+    - Buttons should have a value of `{ "type": "option", "options": [ "On Pressed", "On Long Pressed" ] }`
+    - On/Off switches should have a value of `{ "type": "option", "options": [ "On Pressed", "Off Pressed", "On Long Pressed", "Off Long Pressed"] }`
+- In COGS, open the project and go to `Setup` > `Settings` and enable `Deconz`
 
-This will connect to COGS as a simulator for the Media Master called "My custom Media Master".
+### How to use the plugin
 
-## Build for your COGS project
-
-```
-yarn build
-```
-
-The `build` directory can now be used by COGS as custom Media Master content.
-
-You can place this entire project in your COGS project's `client_content` directory or, once built, you can copy the `build` directory to your COGS project's `client_content` directory. Select the built directory/subdirectory from COGS as your custom Media Master's "Content directory".
-
-![Screenshot from 2021-10-01 09-31-04](https://user-images.githubusercontent.com/292958/135590011-c3d30df6-5590-4a44-8160-f31e3cd4008e.png)
+- To trigger a behaviour from a button select `Deconz: My button` as the "When" and select the event type
+- To change an outlet/light state add an `Update values` action to your behaviour and set it to `True` to turn on or `False` to turn off

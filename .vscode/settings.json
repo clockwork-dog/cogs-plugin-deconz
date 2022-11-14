@@ -4,6 +4,7 @@
     "buttonevent",
     "clockworkdog",
     "Deconz",
-    "websocketport"
+    "websocketport",
+    "Zigbee"
   ]
 }
