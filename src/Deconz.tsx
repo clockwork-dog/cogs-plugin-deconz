@@ -148,7 +148,7 @@ export default function Deconz() {
 
   return (
     <div>
-      <p>DECONZ connected: {websocketConnected.toString()}</p>
+      <p>deCONZ connected: {websocketConnected.toString()}</p>
       <h2>Lights</h2>
       <ul>
         {Object.entries(lights).map(([lightId, light]) =>
