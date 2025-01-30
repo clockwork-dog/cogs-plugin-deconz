@@ -1,5 +1,7 @@
 # COGS deCONZ (Zigbee) plugin
 
+⚠️ This plugin is deprecated. Please use [COGS 5's Zigbee feature](https://cogs.show/features) instead.
+
 ![image](https://user-images.githubusercontent.com/292958/201886256-f6557b12-8e2f-4bbe-a564-4e50643811a3.png)
 
 ## How to use
